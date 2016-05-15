@@ -8,9 +8,6 @@
 #include "stdio.h"
 #include "assert.h"
 
-#ifndef _PARSER
-#define _PARSER
-
 Value *addToParseTree(Value *tree, int *depth, Value *token) {
   Value *current = tree;
   //Value *toPush = 0;
@@ -82,10 +79,15 @@ void printTree(Value *tree) {
     printf("%i", curNode->i);
   } else if (curNode->type == DOUBLE_TYPE) {
     printf("%f", curNode->d);
+  } else if (curNode->type == STR_TYPE) {
+    printf("\"%s\"", curNode->s);
+  } else if (curNode->type == BOOL_TYPE) {
+    if (curNode->i == 0) {
+      printf("#f");
+    } else {
+      printf("#t");
+    }
   } else if (curNode->type != NULL_TYPE) {
     printf("%s", curNode->s);
   }
 }
-
-
-#endif
